@@ -12,12 +12,12 @@ var ground_height : int
 var pipes : Array
 const PIPE_DELAY : int = 100
 const PIPE_RANGE : int = 200
+const PIPE_ROTATION : int = 3
 
 func _ready():
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	new_game()
-	
 
 func new_game():
 	#reset variables
@@ -52,25 +52,28 @@ func start_game():
 	$PipeTimer.start()
 	
 func _process(delta):
+	var pipe = pipe_scene.instantiate()
 	if game_running:
 		scroll += SCROLL_SPEED
-		
 		#reset scroll
 		if scroll >= screen_size.x:
 			scroll = 0
-			
+
 		#move ground
 		$Ground.position.x = -scroll
 		
-		for pipe in pipes:
-			pipe.position.x -= SCROLL_SPEED
-
+		for i in pipes:
+			i.position.x -= SCROLL_SPEED
+	
 
 func _on_pipe_timer_timeout():
 	generate_pipes()
 
 func generate_pipes():
 	var pipe = pipe_scene.instantiate()
+	if score > 0:
+		pipe.rotation_degrees += 360 * 10
+		
 	pipe.position.x = screen_size.x + PIPE_DELAY
 	pipe.position.y = (screen_size.y - ground_height) / 2 + randi_range(-PIPE_RANGE, PIPE_RANGE)
 	pipe.hit.connect(bird_hit)
