@@ -18,7 +18,7 @@ animations = [{
 "texture": ExtResource("4_bnvdc")
 }],
 "loop": true,
-"name": &"Flying",
+"name": &"OrangeBird",
 "speed": 5.0
 }]
 
@@ -31,7 +31,7 @@ script = ExtResource("1_j7mod")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_00p4y")
-animation = &"Flying"
+animation = &"OrangeBird"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

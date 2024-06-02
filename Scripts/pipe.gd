@@ -3,9 +3,6 @@ extends Area2D
 signal hit
 signal scored
 
-func _ready():
-	pass
-	
 	
 func _on_body_entered(body):
 	hit.emit()
